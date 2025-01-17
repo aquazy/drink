@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drink Water Reminder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f0f8ff;
+        }
+        .timer {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .reminder {
+            font-size: 24px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="timer" id="timer"></div>
+    <div class="reminder" id="reminder"></div>
+
+    <script>
+        function startTimer() {
+            const countdownTime = 15 * 60;  // 15分钟
+            let startTime = Date.now();
+
+            function updateTimer() {
+                let currentTime = Date.now();
+                let elapsedTime = Math.floor((currentTime - startTime) / 1000);
+                let remainingTime = countdownTime - elapsedTime;
+
+                if (remainingTime <= 0) {
+                    document.getElementById('reminder').innerHTML = "Time to drink water! Keep yourself hydrated.";
+                    clearInterval(timerInterval);  // 停止定时器
+                } else {
+                    let minutes = Math.floor(remainingTime / 60);
+                    let seconds = remainingTime % 60;
+                    document.getElementById('timer').innerHTML = `Water reminder in: ${minutes} minutes and ${seconds} seconds`;
+                }
+            }
+
+            let timerInterval = setInterval(updateTimer, 1000);  // 每秒更新
+        }
+
+        startTimer();
+    </script>
+
+</body>
+</html>
